@@ -1,0 +1,47 @@
+body {
+    background-color: #28a745; 
+    color: #000; 
+}
+
+#arriba {
+    margin-bottom: 20px;
+}
+
+.btn-outline-success {
+    color: #28a745; 
+    border-color: #28a745; 
+}
+
+.btn-outline-success:hover {
+    background-color: #28a745;
+    color: #fff; 
+}
+
+#presentacion-container {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+#usuario {
+    border-radius: 50%;
+}
+
+.table th, .table td {
+    text-align: center;
+}
+
+.table-striped-columns tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.05); 
+}
+
+.bg-danger, .bg-success {
+    border-radius: 5px;
+}
+
+.bg-danger {
+    background-color: #dc3545; 
+}
+
+.text-white {
+    color: #fff !important; 
+}

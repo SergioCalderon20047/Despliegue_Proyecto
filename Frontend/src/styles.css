@@ -1,0 +1,108 @@
+#arriba {
+    padding: 10px;
+}
+.navbar{
+    border-radius: 10px;
+}
+#arriba ul.navbar-nav {
+    justify-content: center;
+}
+#arriba ul.navbar-nav li.nav-item {
+    margin: 0 150px;
+}
+#todo {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+}
+
+/* Estilos personalizados para el formulario */
+.form-container {
+    background-color: #f8faf8; /* Cambia el color de fondo */
+    padding: 20px; /* Ajusta el espaciado interno */
+}
+
+.form-control {
+    margin-bottom: 10px; /* Ajusta el espaciado entre campos */
+}
+
+a {
+    text-decoration: none;
+}
+
+#arriba {
+    padding: 10px;
+  }
+  
+  .navbar {
+    border-radius: 10px;
+  }
+  
+  #arriba ul.navbar-nav {
+    justify-content: center;
+  }
+  
+  #arriba ul.navbar-nav li.nav-item {
+    margin: 0 170px;
+  }
+  
+  #todo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  #Correr {
+    margin-left: 50px;
+    display: flex;
+    align-items: center;
+  }
+  
+  #Correr img {
+    flex: 0 0 400px;
+  }
+  
+  .text-container {
+    flex-grow: 1;
+    margin-left: 20px;
+  }
+  
+  .text-container h1 {
+    margin-bottom: 10px;
+  }
+  
+  .text-container2 {
+    display: flex;
+    gap: 55px;
+    align-items: center;
+  }
+  
+  .text-container2 p {
+    margin: 0;
+  }
+  
+  #presentacion-container {
+    border: 2px solid black;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  
+  #presentacion {
+    width: 100%;
+  }
+  
+  hr {
+    border: 2px solid black;
+  }
+  
+  #usuario {
+    display: block;
+    margin: 0 auto;
+  }
+  #col{
+    padding: 18px;
+  }
+
+  

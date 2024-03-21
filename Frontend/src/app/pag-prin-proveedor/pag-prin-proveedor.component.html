@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FARMING-COR</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+     
+</head>
+<body class="p-3 mb-2 bg-danger text-dark bg-opacity-10">
+
+    <div >
+        <nav class="navbar navbar-expand-lg p-3 mb-2 bg-danger bg-gradient text-white bg-opacity-50">
+            <div class="container-fluid">
+              <a class="navbar-brand"><img src="./assets/logo.png" alt="Logo" height="50px" width="50px"></a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                  <li class="nav-item ms-5">
+                    <a class="nav-link btn btn-outline-danger text-body text-uppercase" routerLink="/reservaciones">
+                      <img src="./assets/reserva.png" alt="Descripción de la imagen" style="width: 30px; height: 30px;">Reservaciones</a>
+                  </li>                  
+                  
+                  <!-- <li class="nav-item ms-5">
+                    <a class="nav-link btn btn-outline-danger text-body text-uppercase" routerLink="/perfil-proveedor">
+                      <img src="./assets/perfil2.png" alt="Descripción de la imagen" style="width: 30px; height: 30px;">Perfil</a>
+                  </li>                   -->
+                  <li class="nav-item dropdown ms-5">
+                    <a class="nav-link dropdown-toggle btn btn-outline-danger text-body" id="corabastos-dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="./assets/encuenta.png" alt="Texto alternativo de la imagen" width="30" height="30" style="margin-right: 0;"> Tener encuenta
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="corabastos-dropdown">
+                        <li><a class="dropdown-item" href="#" target="_blank">Como funciona nuestro sistema</a></li>
+                        <li><a class="dropdown-item" href="https://www.corabastos.com.co/sites/default/files/2020-07/ReglamentoInterno.pdf" target="_blank">Normas a seguir en corabastos</a></li>
+                        <li><a class="dropdown-item" href="https://corabastos.com.co/negocios/?p=19" target="_blank">Ventajas de ser proveedor</a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item ms-5">
+                    <a class="nav-link btn btn-outline-danger text-body text-uppercase" (click)="cerrarsesion()">
+                      <img src="./assets/salir.png" alt="Descripción de la imagen" style="width: 30px; height: 30px;">Cerrar sesión</a>
+                  </li>                  
+                </ul>
+              </div>
+            </div>
+          </nav>
+    </div>
+    
+    <div id="todo">
+      <div class="px-4 text-center">
+        <div class="row gx-5">
+          <div class="col">
+            <div class="p-3 border border-3 border-dark rounded-5 mb-2 bg-danger-subtle text-emphasis-danger" id="empresa">
+              <table class="table table-danger border border-danger p-2 mb-2 border-opacity-10 custom-table"  *ngFor = "let d of datos | async">
+                <thead>
+                  <tr>
+                    <th colspan="3">
+                      <img [src]="urlimagen+d.foto" class="img-fluid p-3 mb-2 bg-white text-dark" alt="foto" id="perfile" height="300px" width="300px">
+                    </th>
+                  </tr>
+                  <tr>
+                    <th colspan="3">
+                      <a [routerLink]="['/form-perfil-proveedor/', d.correo]" class="btn btn-outline-danger" id="editap">Editar Perfil</a>
+                    </th>                                     
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td colspan="3">
+                      <h1 class="text-uppercase fs-1 fw-bold lh-sm text-center" >{{d.nombre1}} {{d.nombre2}} {{d.apellido1}} {{d.apellido2}}</h1>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <h1 class="fs-3 font-monospace lh-sm text-center">Correo: {{d.correo}}</h1>
+                    </td>
+                    <td><p>  </p></td>
+                    <td>
+                      <h1 class="fs-3 font-monospace lh-sm text-center"> celular:{{d.celular}}</h1>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="2">
+                      <h1 class="fs-3 font-monospace lh-sm text-center">{{d.Direccion}}</h1>
+                    </td>
+                    <td>
+                      <h1 class="fs-3 font-monospace lh-sm text-center">Local: {{d.Num_Local}}</h1>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <br>
+    
+    <div id="todo">
+      <table class="table-transparent">
+        <thead>
+          <tr>
+            <th scope="col" colspan="5">
+              <hr>
+                <a routerLink="/form-product-proveedor" class="btn btn-primary"><img src="./assets/agregar.png" alt="Agregar"> Agregar</a>
+              <hr>
+            </th>
+          </tr>
+        </thead>
+        </table>
+        <table class="table-transparent">
+        <tbody>
+          <tr>
+            <td *ngFor="let producto of producto | async">
+              <div class="card-container"  *ngIf="producto.Estado === 1">
+              <div class="card mx-3 my-3">
+                <img [src]="urlimagenp+producto.Url_Imagen" class="card-img-top" alt="producto" height="250px" width="250px">
+                <div class="card-body">
+                  <h5 class="card-title text-uppercase">{{producto.Nombre_Producto}}</h5>
+                  <p class="card-text">Descripción: {{producto.Descripcion}}</p>
+                  <p class="card-text">Cantidad: {{producto.Cantidad}} </p>
+                  <p class="card-text">Peso: {{producto.pesodesc}}</p>
+                  <a [routerLink]="['../form-product-actualizar/', producto.Id_Producto]" class="btn btn-warning"><img src="./assets/editar2.png" alt="Editar"> Editar</a>
+                  
+                  <button type="button" (click)="Borrar_producto(producto.Id_Producto)" class="btn btn-danger"><img src="./assets/eliminar.png" alt="Borrar"> Borrar</button>
+                </div>
+              </div>
+              </div>
+            </td>
+            
+            
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+</body>
+</html>

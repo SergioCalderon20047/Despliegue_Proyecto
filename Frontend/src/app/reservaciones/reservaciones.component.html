@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservaciones</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #dc3545; 
+            color: #343a40; 
+        }
+
+        #arriba {
+            margin-bottom: 20px;
+        }
+
+        .btn-outline-danger {
+            color: #dc3545; 
+            border-color: #dc3545; 
+        }
+
+        .btn-outline-danger:hover {
+            background-color: #dc3545; 
+            color: #fff; 
+        }
+
+        .table th, .table td {
+            text-align: center;
+        }
+
+        .table thead th {
+            vertical-align: middle;
+        }
+
+        .table-striped-columns tbody tr:nth-of-type(odd) {
+            background-color: rgba(108, 117, 125, 0.1); 
+        }
+
+        .bg-info, .bg-success, .bg-danger {
+            border-radius: 5px;
+        }
+
+        .bg-info {
+            background-color: #17a2b8; 
+        }
+
+        .bg-success {
+            background-color: #28a745; 
+        }
+
+        .bg-danger {
+            background-color: #dc3545; 
+        }
+
+        .text-white {
+            color: #fff !important; 
+        }
+    </style>
+</head>
+<body class="p-3 mb-2 bg-danger text-dark bg-opacity-10">
+
+    <div id="arriba">
+        <nav class="navbar navbar-expand-lg p-3 mb-2 bg-danger bg-gradient text-white bg-opacity-50">
+            <div class="container-fluid">
+                <a class="navbar-brand"><img src="./assets/logo.png" alt="Logo" height="50px" width="50px"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-outline-danger text-body text-uppercase" routerLink="/pag-prin-proveedor">Página principal</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-outline-danger text-body text-uppercase" routerLink="/bienvenido">Cerrar sesión</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <div class="">
+        <table class="table p-3 mb-2 bg-white text-dark">
+            <thead>
+                <tr>
+                    <th>
+                        <h1 class="fs-1 fw-bold lh-sm">Reservaciones</h1>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>
+                        <table class="table table-striped-columns table-success">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Número reserva</th>
+                                    <th scope="col">Nombre del producto</th>
+                                    <th scope="col">Cantidad</th>
+                                    <th scope="col">Fecha</th>
+                                    <th scope="col">Duración</th>
+                                    <th scope="col">Nombre de cliente</th>
+                                    <th scope="col">Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Plátano</td>
+                                    <td>8 libras</td>
+                                    <td>7/10/2023</td>
+                                    <td>9/10/2023</td>
+                                    <td>Juan</td>
+                                    <td><p class="d-inline p-2 bg-info text-white">En espera</p></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Cebolla</td>
+                                    <td>2 libras</td>
+                                    <td>7/10/2023</td>
+                                    <td>9/10/2023</td>
+                                    <td>Federico</td>
+                                    <td><p class="d-inline p-2 bg-success text-white">Entregado</p></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>Tomate</td>
+                                    <td>5 libras</td>
+                                    <td>7/10/2023</td>
+                                    <td>9/10/2023</td>
+                                    <td>Luis</td>
+                                    <td><p class="d-inline p-2 bg-danger text-white">Cancelar</p></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <br><br><br><br><br><br><br><br><br><br><br><br>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+</body>
+</html>

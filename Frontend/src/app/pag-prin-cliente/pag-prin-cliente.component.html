@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FARMING-COR</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+</head>
+
+<body class="p-3 mb-2 bg-success text-black bg-opacity-10">
+
+    <div>
+        <div>
+            <nav class="navbar navbar-expand-lg p-3 mb-2 bg-success bg-gradient text-white bg-opacity-50">
+                <div class="container-fluid">
+                    <a class="navbar-brand"><img src="./assets/logo.png" alt="Logo" height="50px" width="50px"></a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        
+                        <ul class="navbar-nav">
+                            <li class="nav-item dropdown ms-5">
+                                <a class="nav-link dropdown-toggle btn btn-outline-success text-body" id="corabastos-dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="./assets/indicar.png" alt="Indicaciones" width="30" height="30" style="margin-right: 5px;"> INDICACIONES
+                                </a>
+                                
+                                <ul class="dropdown-menu" aria-labelledby="corabastos-dropdown">
+                                    <li><a class="dropdown-item" href="#" target="_blank">Como funciona nuestro sistema</a></li>
+                                    <li><a class="dropdown-item" href="https://corabastos.com.co/inicio/" target="_blank" >Sobre Corabastos</a></li>
+                                    <li><a class="dropdown-item" href="https://www.bancodealimentos.org.co/corabastos/" target="_blank">Punto de donación</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item ms-5">
+                                <a class="nav-link btn btn-outline-success text-body" routerLink="/perfil-cliente">
+                                    <img src="./assets/perfil2.png" alt="Perfil" width="30" height="30" style="margin-right: 5px;"> PERFIL
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item ms-5">
+                                <a class="nav-link btn btn-outline-success text-body" (click)="cerrarsesion()">
+                                    <img src="./assets/salir.png" alt="Cerrar Sesión" width="30" height="30" style="margin-right: 5px;"> CERRAR SESIÓN
+                                </a>
+                            </li>                         
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div class="container mt-3">
+            <div class="row justify-content-end">
+                <div class="col-md-6">
+                    <form class="col-md-auto mb-3">
+                        <div class="input-group">
+                          <input type="text" class="form-control" placeholder="Buscar productos..." style="width: calc(100% - 1000px);">
+                          <button class="btn btn-success" type="button" style="width: 85px; height:37.5px;  ">Buscar</button>
+                        </div>
+                      </form>
+                </div>
+            </div>
+        </div>
+        <br>
+        
+        <div id="todo" class="mx-5">
+            <table class="px-3 mb-2 bg-light text-dark">
+                <thead>
+                    <tr>
+                      <th colspan="7">
+                        <div class="d-flex align-items-center justify-content-center">
+                          <img src="./assets/logo.png" alt="Texto alternativo de la imagen" width="70" height="70" class="me-3">
+                          <h1 class="col-md-auto mb-3 text-center" style="margin-top: 20px;">Productos</h1>
+                        </div>
+                      </th>
+                    </tr>
+                  </thead>
+                  
+                <tbody>
+                    <tr>
+                    <td *ngFor="let producto of producto | async">
+                        <div class="card-container" *ngIf="producto.Estado === 1">
+                        <div class="p-3 mb-2 bg-success-subtle text-emphasis-success">
+                            <img [src]="urlimagenp+producto.Url_Imagen" class="card-img-top" alt="producto" width="250px" height="250px">
+                            <div class="card-body">
+                                <h5 class="card-title text-uppercase">{{producto.Nombre_Producto}}</h5>
+                                <p class="card-text">
+                                <h6>Descripción:</h6> {{producto.Descripcion}}
+                                <p class="card-text">
+                                <h6>Cantidad disponible:</h6> {{producto.Cantidad}}
+                            <br>
+                            <a routerLink="/detalle-cilantro" class="btn btn-success"><img src="./assets/observar.png" alt="Ver"> Ver</a>
+                        </div>
+                        </div>
+                        </div>
+                    </td>
+                </tbody>
+                <br><br>
+            </table>
+            <br><br>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"crossorigin="anonymous"></script>
+</body>
+
+</html>

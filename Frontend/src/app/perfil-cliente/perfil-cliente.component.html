@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body class="p-3 mb-2 bg-success text-black bg-opacity-10">
+
+    <div id="arriba">
+      <nav class="navbar navbar-expand-lg p-3 mb-2 bg-success bg-gradient text-white bg-opacity-50">
+        <div class="container-fluid">
+          <a class="navbar-brand"><img src="./assets/logo.png" alt="Logo" height="50px"
+              width="50px"></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link btn btn btn-outline-success text-body"
+                routerLink="/pag-prin-cliente">PÁGINA PRINCIPAL</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link btn btn btn-outline-success text-body" routerLink="/bienvenido">CERRAR SESIÓN</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <div id="todo">
+      <div class="container px-4 text-center">
+        <div class="row gx-5">
+          <div class="col">
+            <div class="p-3">
+              <div id="presentacion-container" class="p-3 mb-2 bg-white text-black">
+                <table id="presentacion" *ngFor="let d of datos | async">
+                  <thead>
+                    <tr>
+                      <th>
+                        <h1 class="text-center fs-1 fw-bold lh-base font-monospace text-uppercase">{{d.usuario}}</h1>
+                      </th>
+                    </tr>
+                    <tr>
+                      <th>
+                        <hr>
+                      </th>
+                    </tr>
+                    <tr>
+                      <th>
+                        <img [src]="urlimagen+d.foto" class="img-fluid d-flex justify-content-center p-3 mb-2 bg-white text-black" id="usuario" alt="usuario">
+                      </th>
+                    </tr>
+                    <tr>
+                      <th colspan="3">
+                        <a [routerLink]="['/form-perfil-cliente/',d.correo]" class="btn btn-light">Editar Perfil</a>
+                    </th>                                    
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <hr>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p class="text-center lh-base font-monospace fs-2 fw-semibold">{{d.nombre1}} {{d.nombre2}} {{d.apellido1}} {{d.apellido2}}</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <hr>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p class="text-center lh-base font-monospace fs-2 fw-semibold">{{d.correo}}</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <hr>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td >
+                        <p class="text-center lh-base font-monospace fs-2 fw-semibold">{{ d.celular }}</p>
+                      </td>
+                      
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col" id="col">
+            <div class="p-3 mb-2 bg-white text-dark border border-black rounded-4 border-2">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Duración</th>
+                    <th scope="col">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>5/10/2023</td>
+                    <td>7/10/2023</td>
+                    <button type="button" class="btn btn-primary"><img src="./assets/esperar.png" alt="espera" style="width: 20px; height: 20px;"> Espera</button>
+                    <button type="button" class="btn btn-danger" style="margin-left: 10px;"><img src="./assets/eliminar.png" alt="Cancelar" style="width: 20px; height: 20px;"> Cancelar</button>
+
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>25/09/2023</td>
+                    <td>26/09/2023</td>
+                    <td><div class="d-inline p-1 bg-danger text-white">Cancelado</div></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>1/09/2023</td>
+                    <td>4/09/2023</td>
+                    <td><div class="d-inline p-1 bg-success text-white">Entregado</div></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+</body>
+</html>

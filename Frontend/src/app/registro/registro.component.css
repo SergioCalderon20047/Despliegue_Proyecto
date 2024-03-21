@@ -1,0 +1,379 @@
+body{
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background: aliceblue;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+td{
+    width: 50%;
+    text-align:center;
+}
+
+.forms_registro {
+    border-radius: 5px;
+    background-color: rgba(238, 225, 222, 0.5);
+    border: 1px ridge #006600;
+    margin: 0 auto;
+    height: 30%;
+    width: 40%;
+    margin-top: 50px; /* Ajusta el margen superior según tus necesidades */
+    display: flex;
+    flex-direction: column; /* Para centrar verticalmente */
+    justify-content: center; /* Para centrar horizontalmente */
+    align-items: center;
+    border-spacing: 1px 5px;
+}
+
+
+#table-bienvenido{
+    margin:0 auto;
+    margin-top:10%;
+    border-spacing:40px;
+}
+
+#table-registro{
+    border-radius:5px;
+    background-color: rgba(238, 225, 222, 0.5);
+    border: 1px ridge #006600;
+    margin:0 auto;
+    width: 55%;
+    margin-top:100px;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    border-spacing: 1px 5px;
+}
+
+#table-registro-persona{
+    border-radius:5px;
+    background-color: rgba(238, 225, 222, 0.5);
+    margin:0 auto;
+    width: 100%;
+    height: 100%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    border-spacing: 1px 5px;
+}
+
+#table-ing {
+    border-radius: 5px;
+    background-color: rgba(238, 225, 222, 0.5);
+    border: 1px ridge #006600; 
+    margin: 0 auto;
+    height: 250px; 
+    width: 450px;  
+    margin-top: 100px;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    border-spacing: 1px 18px;
+
+}
+
+
+#table-contactanos{
+    border-radius:5px;
+    background-color: rgba(238, 225, 222, 0.5);
+    border: 1px ridge #006600;
+    margin:0 auto;
+    height: 400px;
+    width: 500px;
+    margin-top:100px;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    border-spacing: 1px 5px;
+
+}
+
+#table-productos{
+    margin: auto;
+    margin-top: 5px;
+    height: 90%;
+    width: 90%;
+    background-color: rgba(238, 225, 222, 0.5);
+    border-radius: 10px;
+    text-align: center;
+}
+
+#table-proveedor{
+    border-collapse:separate;
+    border-spacing: 1px 1px;
+    margin: auto;
+    margin-top: 10%;
+    height: 50px;
+    width: 600px;
+    background-color: rgba(238, 225, 222, 0.5);
+    border: 1px ridge #006600;
+    border-radius:5px;
+}
+
+#table-agregar-producto{
+    margin: auto;
+    margin-top: 50px;
+    height: 300px;
+    width: 500px;
+    background-color: rgba(238, 225, 222, 0.5);
+    border: 1px ridge #006600;
+    border-radius: 6px;
+}
+
+#a-agregar-producto{
+    margin: auto;
+    margin-top: 150px;
+    height: 200px;
+    width: 350px;
+    background-color: rgba(238, 225, 222, 0.5);
+    border: 1px ridge #006600;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    border-spacing: 1px 20px;
+}
+
+#a-contactanos{
+    margin: auto;
+    margin-top: 150px;
+    height: 200px;
+    width: 400px;
+    background-color: rgba(238, 225, 222, 0.5);
+    border: 1px ridge #006600;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    border-spacing: 1px 40px;
+
+}
+
+#a-registro{
+    margin: auto;
+    margin-top: 150px;
+    height: 200px;
+    width: 35%;
+    background-color: rgba(238, 225, 222, 0.5);
+    border: 1px ridge #006600;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    border-spacing: 1px 20px;
+}
+
+#cuadro-productos-persona{
+    margin: auto;
+    margin-top: 100px;
+    height: 250px;
+    width: 450px;
+    background-color: rgba(238, 225, 222, 0.5);
+    border: 1px ridge #006600;
+    border-radius: 6px;
+}
+
+#img-cliente{
+    box-shadow: 0 0 20px lightgreen;
+    border:rgba(238, 225, 222, 0.5) 10px solid;
+    border-radius: 6px;
+    border-style:outset;
+    height: 300px;
+    width: 450px;
+    background-size:cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#img-vendedor{
+    box-shadow: 0 0 20px lightgreen;
+    border: rgba(238, 225, 222, 0.5) 10px solid;
+    border-radius:6px;
+    border-style:outset;
+    height: 300px;
+    width:450px;
+    background-size:cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#indice-menu{
+    background: linear-gradient(to right, rgb(13, 240, 43), #ccc);
+    height: 80px;
+    width: 100%;
+    border-radius: 10px;
+}
+
+#ul-menu{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#logo-p-prods{
+    margin:0 auto;
+    margin-top: 30px;
+    width: 90%;
+}
+
+#logo-p-vendedor{
+    margin:0 auto;
+    margin-top: 100px;
+    width: 900px;
+}
+
+
+#img-agregar-prod{
+    background-repeat: no-repeat;
+    background-size:cover;
+    height:200px;
+    width: 200px;
+    
+}
+
+#img-ver-prod{
+    background-repeat: no-repeat;
+    background-size:cover;
+    height:200px;
+    width: 200px;
+    
+}
+
+#img-p-verduras{
+    height: 200px;
+    width:350px;
+    background-size:cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#img-p-frutas{
+    height: 200px;
+    width:350px;
+    background-size:cover;
+    background-position: center;
+    background-repeat:no-repeat;
+}
+
+.boton-regresar{
+    position: absolute;
+    margin-top: 2%;
+    margin-left: 5%;
+    border-radius: 5px;
+    border:1px solid #006600;
+    box-shadow: 0 0 5px teal;
+    height: 5%;
+    width: 10%;
+}
+
+.boton-regresar:hover{
+    padding:4px;
+    background:#33e942;
+    color:#0d0e0d;
+    height: 6%;
+    width: 11%;
+}
+
+.boton-regresar:active{
+    padding:4px;
+    background: #006600;
+}
+
+.cuadro-perfil{
+    background-color: rgba(238, 225, 222, 0.5);
+    height: 60px;
+    width: 400px;
+    float: right;
+    border-radius: 10px;
+}
+
+.circulo-img-perfil{
+    width: 20%;
+    background-color: teal;
+    border-radius: 50%; /* Esto hace que los bordes sean redondeados */
+}
+
+.td-agregar-productos{
+    padding-bottom: 30px;
+}
+
+.li-menu{
+    display: inline-block;
+}
+
+.a-menu{
+    color:black;
+    text-decoration: 0;
+    display: block;
+    padding: 10px 80px;
+    font-size: medium;
+}
+
+.a-menu:hover{
+    background-color: chartreuse;
+    border-radius: 10px;
+    box-shadow:0 0 10px #006600 ;
+}
+
+.a-menu:active{
+    padding: 10px 80px;
+    background: #006600;
+}
+
+
+.submit{
+    border-radius:6px;
+    padding:4px;
+    border:1px solid rgb(243, 245, 242);
+    background-color: rgb(238, 241, 235);
+    box-shadow: 0 0 5px #33c4e9;
+}
+
+
+.inputs{
+    padding:4px;
+    border-radius:6px;
+    border:1px solid chartreuse;
+    outline:none;
+}
+
+.submit:hover{
+    padding:4px;
+    background:#33e942;
+    color:#0d0e0d;
+}
+
+.submit:active{
+    padding:4px;
+    background: #006600;
+}
+
+.td-productos{
+    padding-bottom: 50px;
+}
+
+
+.logo{
+    height: 15%;
+    width: 400px;
+    text-align: center;
+    border: #0dda0d 8px solid;
+    border-style:outset;
+    background-color: #25c425;
+    font-size: x-large;
+}
+
+
+
+@media (max-width: 480px) {
+    #a-agregar-producto#table-ing,#table-reg{
+        width: 90%;
+    }
+    #table-contactanos{
+        width:max-content;
+        border-spacing: 5px 10px;
+    }
+    
+}

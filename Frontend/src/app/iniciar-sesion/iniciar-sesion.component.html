@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inicio de Sesión</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+
+  <div class="p-3 mb-2 bg-success text-black bg-opacity-10">
+    <div id="arriba">
+      <nav class="navbar navbar-expand-lg p-3 mb-2 bg-success bg-gradient text-white bg-opacity-50">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#"><img src="./assets/logo.png" alt="Logo" height="50px" width="50px"></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                  <h1>FARMING-COR</h1>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <div class="container mt-5">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-body">
+              <div class="text-center">
+                <h3 class="card-title">Iniciar Sesión</h3>
+              </div>
+              <form (ngSubmit)="iniciarSesion()">
+                <div class="mb-3">
+                  <label for="correo" class="form-label">Correo:</label>
+                  <input type="email" [(ngModel)]="correo" class="form-control" id="correo" name="correo" required>
+                </div>
+                <div class="mb-3">
+                  <label for="password" class="form-label">Contraseña:</label>
+                  <input type="password" [(ngModel)]="password" class="form-control" id="password" name="password" required>
+                </div>
+                <div class="mb-3">
+                  <label for="rol" class="form-label">Usuario:</label>
+                  <select [(ngModel)]="rol" id="rol" name="rol" class="form-control" required>
+                    <option value="" disabled selected>Selecciona un rol</option>
+                    <option value="1">Administrador</option>
+                    <option value="2">Proveedor</option>
+                    <option value="3">Cliente</option>
+                  </select>
+                </div>
+                <div class="d-flex justify-content-between">
+                  <button type="submit" class="btn btn-success">Ingresar</button>
+                  <a routerLink="/Recuperar" class="text-success text-decoration-none">Recuperar Contraseña</a>
+                </div>                
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div><br><br><br><br><br><br><br>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+
+</body>
+</html>

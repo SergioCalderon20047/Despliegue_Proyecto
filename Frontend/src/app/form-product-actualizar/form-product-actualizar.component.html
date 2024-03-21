@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Producto</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <style>
+        body {
+            background-image: url('fondo-imagen.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: #fff;
+        }
+
+        .navbar {
+            background-color: #2196F3;
+        }
+
+        .header-bg {
+            background-color: #007BFF;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        form {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        button[type="submit"] {
+            background-color: #007BFF;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="arriba">
+        <nav class="navbar navbar-expand-lg p-3 mb-2 bg-primary bg-gradient text-white bg-opacity-50">
+            <div class="container-fluid">
+                <a class="navbar-brand"><img src="./assets/logo.png" alt="Logo" height="50px" width="50px"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-outline-primary text-body text-uppercase" routerLink="/pag-prin-proveedor">Regresar</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h2 class="header-bg text-center">PRODUCTOS</h2>
+                <form (ngSubmit)="onSubmit()" #usuarioForm="ngForm">
+                    <div class="mb-3">
+                        <label for="Producto" class="form-label"><b>Nombre del producto:</b></label>
+                        <input type="text" [(ngModel)]="producto.Nombre_Producto" class="form-control" name="Nombre_Producto" id="Nombre_Producto" placeholder="Nombre del Producto">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Descripcion" class="form-label"><b>Descripción:</b></label>
+                        <textarea class="form-control" [(ngModel)]="producto.Descripcion" name="Descripcion" id="Descripcion" placeholder="Descripción"></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="Cantidad" class="form-label"><b>Cantidad:</b></label>
+                            <input type="text" [(ngModel)]="producto.Cantidad" class="form-control" name="Cantidad" id="Cantidad" placeholder="Cantidad">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="Peso" class="form-label"><b>Peso:</b></label>
+                            <select class="form-select" [(ngModel)]="producto.Id_Peso" name="Id_Peso" id="Peso" required>
+                                <option value="" disabled selected hidden>Seleccione el peso:</option>
+                                <option value="1">Unidad</option>
+                                <option value="2">Kilos</option>
+                                <option value="3">libras</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Categoria" class="form-label"><b>Categoría:</b></label>
+                        <select class="form-select" [(ngModel)]="producto.Id_Categoria" name="Id_Categoria" id="Categoria" required>
+                            <option value="" disabled selected hidden>Seleccione la categoría del alimento:</option>
+                            <option value="1">Fruta</option>
+                            <option value="2">Verdura</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="foto" class="form-label"><b>Imagen del producto:</b></label>
+                        <input class="form-control text-body" type="file" id="formFileMultiple" accept="image/*" (change)="selectImage($event)" name="Url_Imagen" [(ngModel)]="producto.Url_Imagen" multiple required placeholder="foto">
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary">Publicar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+</body>
+
+</html>
