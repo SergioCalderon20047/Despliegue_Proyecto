@@ -34,6 +34,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Configurar CORS después de la inicialización de app
 app.use(cors());
 
+app.get("/", (req,rest)=>{res.send("Conectado Correctamente")})
 
 // Ruta para registrar un usuario
 app.post('/registrar', async (req, res) => {
