@@ -46,7 +46,7 @@ app.post('/registrar', async (req, res) => {
     const hashContraseña = await bcrypt.hash(password, 10); // 10 es el costo de la encriptación (mayor es más seguro pero más lento)
 
     // Realiza la inserción en la base de datos con la contraseña encriptada
-    const queryString = 'INSERT INTO datos_personales (nombre1, nombre2, apellido1, apellido2, fk_tipo_doc, numero_doc, correo, usuario, Direccion, Num_Local, fk_tipo_rol, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+    const queryString = 'INSERT INTO Datos_Personales (nombre1, nombre2, apellido1, apellido2, fk_tipo_doc, numero_doc, correo, usuario, Direccion, Num_Local, fk_tipo_rol, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
     const values = [nombre1, nombre2, apellido1, apellido2, tipodoc, Num_Doc, correo, usuario, direccion, local, rol, hashContraseña];
 
     db.query(queryString, values, (err, result) => {
