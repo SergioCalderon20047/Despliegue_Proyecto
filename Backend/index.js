@@ -70,7 +70,7 @@ app.post('/autenticar', async (req, res) => {
 
   console.log('Datos recibidos:', { correo, password, rol });
 
-  const query = `SELECT * FROM datos_personales WHERE correo = ? AND fk_tipo_rol = ?`;
+  const query = `SELECT * FROM Datos_Personales WHERE correo = ? AND fk_tipo_rol = ?`;
   db.query(query, [correo, rol], async (error, results) => {
     if (error) {
       console.error('Error en la autenticación:', error);
