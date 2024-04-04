@@ -724,4 +724,4 @@ app.listen(port, () => {
 db.connect(error => {
   if(error) throw error
   console.log('conectado a la base de datos')
-})
+});
