@@ -116,7 +116,7 @@ app.post('/registrar', async (req, res) => {
     const hashContraseña = await bcrypt.hash(password, 10); // 10 es el costo de la encriptación (mayor es más seguro pero más lento)
 
     // Realizar la inserción en la base de datos con la contraseña encriptada
-    const queryString = 'INSERT INTO datos_personales (Id_Dato_Personal, nombre1, nombre2, apellido1, apellido2, fk_tipo_doc, correo, usuario, Direccion, Num_Local, fk_tipo_rol, password, estado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)';
+    const queryString = 'INSERT INTO Datos_Personales (Id_Dato_Personal, nombre1, nombre2, apellido1, apellido2, fk_tipo_doc, correo, usuario, Direccion, Num_Local, fk_tipo_rol, password, estado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)';
     const values = [Num_Doc, nombre1, nombre2, apellido1, apellido2, tipodoc, correo, usuario, direccion, local, rol, hashContraseña,];
 
     db.query(queryString, values, (err, result) => {
@@ -143,7 +143,7 @@ app.post('/autenticar', async (req, res) => {
 
   console.log('Datos recibidos:', { correo, password, rol });
 
-  const query = `SELECT * FROM datos_personales WHERE correo = ? AND fk_tipo_rol = ?`;
+  const query = `SELECT * FROM Datos_Personales WHERE correo = ? AND fk_tipo_rol = ?`;
   db.query(query, [correo, rol], async (error, results) => {
     if (error) {
       console.error('Error en la autenticación:', error);
