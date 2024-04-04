@@ -100,7 +100,7 @@ app.get("/", (req,res)=>{res.send("Conectado Correctamente")})
  *         description: Error interno del servidor.
  */
 
-// registrar usuario 
+// backend: // registrar usuario 
 app.post('/registrar', async (req, res) => {
   console.log('Recibida solicitud de registro:', req.body);
   const { nombre1, nombre2, apellido1, apellido2, tipodoc, Num_Doc, correo, usuario, direccion, local, rol, password } = req.body;
@@ -112,14 +112,31 @@ app.post('/registrar', async (req, res) => {
       return res.status(400).json({ error: 'Correo electrónico inválido' });
     }
 
+    // Verificar si el correo electrónico ya está registrado en la base de datos
+    const correoExistente = await new Promise((resolve, reject) => {
+      const queryString = 'SELECT * FROM datos_personales WHERE correo = ?';
+      db.query(queryString, [correo], (err, result) => {
+        if (err) {
+          console.error('Error al buscar correo en la base de datos:', err);
+          reject('Error interno del servidor');
+        } else {
+          resolve(result.length > 0);
+        }
+      });
+    });
+
+    if (correoExistente) {
+      return res.status(400).json({ error: 'El correo electrónico ya está registrado' });
+    }
+
     // Generar un hash de la contraseña utilizando bcrypt
     const hashContraseña = await bcrypt.hash(password, 10); // 10 es el costo de la encriptación (mayor es más seguro pero más lento)
 
     // Realizar la inserción en la base de datos con la contraseña encriptada
-    const queryString = 'INSERT INTO Datos_Personales (Id_Dato_Personal, nombre1, nombre2, apellido1, apellido2, fk_tipo_doc, correo, usuario, Direccion, Num_Local, fk_tipo_rol, password, estado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)';
-    const values = [Num_Doc, nombre1, nombre2, apellido1, apellido2, tipodoc, correo, usuario, direccion, local, rol, hashContraseña,];
+    const queryStringInsert = 'INSERT INTO datos_personales (Id_Dato_Personal, nombre1, nombre2, apellido1, apellido2, fk_tipo_doc, correo, usuario, Direccion, Num_Local, fk_tipo_rol, password, estado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)';
+    const values = [Num_Doc, nombre1, nombre2, apellido1, apellido2, tipodoc, correo, usuario, direccion, local, rol, hashContraseña];
 
-    db.query(queryString, values, (err, result) => {
+    db.query(queryStringInsert, values, (err, result) => {
       if (err) {
         console.error('Error al registrar usuario en la base de datos:', err);
         res.status(500).json({ error: 'Error interno del servidor' });
@@ -137,13 +154,14 @@ app.post('/registrar', async (req, res) => {
 
 
 
+
 // Inicio de sesión
 app.post('/autenticar', async (req, res) => {
   const { correo, password, rol } = req.body;
 
   console.log('Datos recibidos:', { correo, password, rol });
 
-  const query = `SELECT * FROM Datos_Personales WHERE correo = ? AND fk_tipo_rol = ?`;
+  const query = `SELECT * FROM datos_personales WHERE correo = ? AND fk_tipo_rol = ?`;
   db.query(query, [correo, rol], async (error, results) => {
     if (error) {
       console.error('Error en la autenticación:', error);
@@ -373,7 +391,7 @@ app.put('/productos_actualizar/:id', (req, res) => {
 // Muestra los productos
 app.get('/mostrar_producto', (req, res) => {
   // Consulta SQL para seleccionar los productos y sus detalles
-  const query = `SELECT Id_Producto, Pesos.Descripcion AS pesodesc, Id_Categoria, Id_Reserva, Nombre_Producto, Cantidad, productos.Descripcion, Url_Imagen, productos.Estado FROM Productos INNER JOIN Pesos ON Productos.Id_Peso = Pesos.Id_peso`;
+  const query = `SELECT Id_Producto, pesos.Descripcion AS pesodesc, Id_Categoria, Id_Reserva, Nombre_Producto, Cantidad, productos.Descripcion, Url_Imagen, productos.Estado FROM productos INNER JOIN pesos ON productos.Id_Peso = pesos.Id_peso`;
   
   // Ejecutar la consulta en la base de datos
   db.query(query, (error, resultado) => {
@@ -393,7 +411,7 @@ app.get('/mostrar_producto', (req, res) => {
 app.get('/mostrar_producto/:correo_usuario', (req, res) => {
   const {correo_usuario} = req.params
   console.log(correo_usuario)
-  const query = `SELECT Id_Producto, correo,Pesos.Descripcion AS pesodesc, Id_Categoria, Id_Reserva, Nombre_Producto, Cantidad, productos.Descripcion, Url_Imagen, productos.Estado FROM Productos INNER JOIN Pesos ON Productos.Id_Peso = Pesos.Id_peso INNER JOIN Datos_Personales on Datos_personales.Id_Dato_Personal = productos.Id_Dato_Personal WHERE correo = '${correo_usuario}'`
+  const query = `SELECT Id_Producto, correo,pesos.Descripcion AS pesodesc, Id_Categoria, Id_Reserva, Nombre_Producto, Cantidad, productos.Descripcion, Url_Imagen, productos.Estado FROM productos INNER JOIN pesos ON productos.Id_Peso = pesos.Id_peso INNER JOIN datos_personales on datos_personales.Id_Dato_Personal = productos.Id_Dato_Personal WHERE correo = '${correo_usuario}'`
 
   db.query(query, (error, resultado) => {
     if (error) return console.error(error.message)
@@ -566,8 +584,8 @@ app.get('/datos/producto/:id', (req, res) => {
         p.Estado,
         dp.*
     FROM 
-        Productos p 
-        INNER JOIN Pesos pes ON p.Id_Peso = pes.Id_peso
+        productos p 
+        INNER JOIN pesos pes ON p.Id_Peso = pes.Id_peso
         INNER JOIN Datos_Personales dp ON p.Id_Dato_Personal = dp.Id_Dato_Personal
     WHERE 
         p.Id_Producto = ${id}`;
@@ -591,7 +609,7 @@ app.get('/datos/producto/:id', (req, res) => {
 app.get('/productos/cliente/:id', (req, res) => {
   const { id } = req.params;
   // const query = `SELECT Id_Producto, pesos.Descripcion AS pesodesc, Id_Categoria, Id_Reserva, Nombre_Producto, Cantidad, productos.Descripcion, Url_Imagen, Estado FROM productos INNER JOIN pesos ON productos.Id_Peso = pesos.Id_peso where Id_Producto = ${id}`;
-  const query = `SELECT Id_Producto, correo, Pesos.Descripcion AS pesodesc, Id_Categoria, Id_Reserva, Nombre_Producto, Cantidad, productos.Descripcion, Url_Imagen, productos.Estado FROM Productos INNER JOIN Pesos ON productos.Id_Peso = Pesos.Id_peso INNER JOIN Datos_Personales on Datos_Personales.Id_Dato_Personal = productos.Id_Dato_Personal WHERE Id_Dato_Personal = '${id}'`
+  const query = `SELECT Id_Producto, correo, pesos.Descripcion AS pesodesc, Id_Categoria, Id_Reserva, Nombre_Producto, Cantidad, productos.Descripcion, Url_Imagen, productos.Estado FROM productos INNER JOIN pesos ON productos.Id_Peso = pesos.Id_peso INNER JOIN datos_personales on datos_personales.Id_Dato_Personal = productos.Id_Dato_Personal WHERE Id_Dato_Personal = '${id}'`
   db.query(query, (err, result) => {
       if (err) {
           console.error('error al mostrar', err);
@@ -608,20 +626,35 @@ app.get('/productos/cliente/:id', (req, res) => {
 });
 
 app.post('/reservar_producto_usuario', (req, res) => {
-  const { Fecha_Inicio, Duracion, Estado } = req.body;
+  const { Id_Producto, Fecha_Inicio, Duracion, Estado } = req.body;
+  console.log(Id_Producto);
 
   // Inserta la reserva en la tabla Reservas
-  const query = 'INSERT INTO Reservas (Fecha_Inicio, Duracion, Estado) VALUES (?, ?, ?)';
-  db.query(query, [Fecha_Inicio, Duracion, Estado], (err, result) => {
+  const insertReservaQuery = 'INSERT INTO Reservas (Fecha_Inicio, Duracion, Estado) VALUES (?, ?, ?)';
+  db.query(insertReservaQuery, [Fecha_Inicio, Duracion, Estado], (err, result) => {
     if (err) {
       console.error('Error al reservar el producto:', err);
       res.status(500).json({ error: 'Error interno del servidor' });
     } else {
-      console.log('Producto reservado con éxito');
-      res.status(200).json({ message: 'Producto reservado con éxito' });
+      const reservaId = result.insertId; // Obtiene el ID de reserva generado automáticamente
+
+      // Actualiza el ID de reserva en la tabla de Productos
+      const updateProductoQuery = `UPDATE Productos SET Id_Reserva = ? WHERE Id_Producto = ${Id_Producto}`;
+      db.query(updateProductoQuery, [reservaId, Id_Producto], (err, result) => {
+        if (err) {
+          console.error('Error al actualizar el ID de reserva en la tabla de Productos:', err);
+          res.status(500).json({ error: 'Error interno del servidor' });
+        } else {
+          console.log('Producto reservado con éxito');
+          res.status(200).json({ message: 'Producto reservado con éxito' });
+        }
+      });
     }
-  }); 
+  });
 });
+
+
+
 
 
 
@@ -658,16 +691,24 @@ app.get('/usuario_info/:correo', (req, res) => {
 });
 
 app.get('/reservas', (req, res) => {
-  const query = `SELECT * FROM Reservas`;
+  const query = `
+    SELECT p.*, r.*
+    FROM Productos p
+    INNER JOIN Reservas r 
+    ON p.Id_Reserva = r.Id_Reserva
+  `;
   db.query(query, (error, results) => {
-        if (error) {
-          console.error('Error al ejecutar la consulta:', error);
-          res.status(500).json({ error: 'Error interno del servidor' });
-          return;
-        }
-        res.status(200).json(results);
-      });
-    });
+    if (error) {
+      console.error('Error al ejecutar la consulta:', error);
+      res.status(500).json({ error: 'Error interno del servidor' });
+      return;
+    }
+    res.status(200).json(results);
+  });
+});
+
+
+
 
 // Endpoint para actualizar una reserva por ID
 app.put('/reservas/:id', (req, res) => {
@@ -678,7 +719,7 @@ app.put('/reservas/:id', (req, res) => {
   console.log(id);
 
 
-  const sql = `UPDATE Reservas SET Estado = ? WHERE Id_Reserva = ?`;
+  const sql = `UPDATE reservas SET Estado = ? WHERE Id_Reserva = ?`;
   db.query(sql, [estado, id], (err, result) => {
     if (err) {
       console.error('Error al actualizar reserva:', err);
@@ -724,4 +765,4 @@ app.listen(port, () => {
 db.connect(error => {
   if(error) throw error
   console.log('conectado a la base de datos')
-});
+})
