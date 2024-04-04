@@ -20,25 +20,20 @@ const port = 5000;
 
 // Configuración de la conexión a MySQL
 const db = mysql.createConnection({
-  host: 'bgyf8muwlkxkgk4t06p2-mysql.services.clever-cloud.com',
-  port: 3306,
-  user: 'uwhi2ehgq1ymqfax',
-  password: 'XW3CEsTF8fKJ3zbC6nnV',
-  database: 'bgyf8muwlkxkgk4t06p2'
+  host: '127.0.0.1',
+  user: 'root',
+  password: '',
+  database: 'Proyecto'
 });
 
 // Conectar a MySQL
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
 // Configurar CORS después de la inicialización de app
 app.use(cors());
 
-app.get("/", (req,res)=>{res.send("Conectado Correctamente")})
-
-
-// backend: // registrar usuario 
+// registrar usuario 
 app.post('/registrar', async (req, res) => {
   console.log('Recibida solicitud de registro:', req.body);
   const { nombre1, nombre2, apellido1, apellido2, tipodoc, Num_Doc, correo, usuario, direccion, local, rol, password } = req.body;
@@ -50,31 +45,14 @@ app.post('/registrar', async (req, res) => {
       return res.status(400).json({ error: 'Correo electrónico inválido' });
     }
 
-    // Verificar si el correo electrónico ya está registrado en la base de datos
-    const correoExistente = await new Promise((resolve, reject) => {
-      const queryString = 'SELECT * FROM datos_personales WHERE correo = ?';
-      db.query(queryString, [correo], (err, result) => {
-        if (err) {
-          console.error('Error al buscar correo en la base de datos:', err);
-          reject('Error interno del servidor');
-        } else {
-          resolve(result.length > 0);
-        }
-      });
-    });
-
-    if (correoExistente) {
-      return res.status(400).json({ error: 'El correo electrónico ya está registrado' });
-    }
-
     // Generar un hash de la contraseña utilizando bcrypt
     const hashContraseña = await bcrypt.hash(password, 10); // 10 es el costo de la encriptación (mayor es más seguro pero más lento)
 
     // Realizar la inserción en la base de datos con la contraseña encriptada
-    const queryStringInsert = 'INSERT INTO datos_personales (Id_Dato_Personal, nombre1, nombre2, apellido1, apellido2, fk_tipo_doc, correo, usuario, Direccion, Num_Local, fk_tipo_rol, password, estado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)';
-    const values = [Num_Doc, nombre1, nombre2, apellido1, apellido2, tipodoc, correo, usuario, direccion, local, rol, hashContraseña];
+    const queryString = 'INSERT INTO datos_personales (Id_Dato_Personal, nombre1, nombre2, apellido1, apellido2, fk_tipo_doc, correo, usuario, Direccion, Num_Local, fk_tipo_rol, password, estado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)';
+    const values = [Num_Doc, nombre1, nombre2, apellido1, apellido2, tipodoc, correo, usuario, direccion, local, rol, hashContraseña,];
 
-    db.query(queryStringInsert, values, (err, result) => {
+    db.query(queryString, values, (err, result) => {
       if (err) {
         console.error('Error al registrar usuario en la base de datos:', err);
         res.status(500).json({ error: 'Error interno del servidor' });
@@ -88,9 +66,6 @@ app.post('/registrar', async (req, res) => {
     res.status(500).json({ error: 'Error interno del servidor' });
   }
 });
-
-
-
 
 
 // Inicio de sesión
@@ -452,60 +427,18 @@ app.get('/rol', (req, res) => {
 });
 
 
-app.get('/datos_info/cliente', (req, res) => {
-  const query = 'SELECT * FROM Datos_Personales where fk_tipo_rol = 3';
+// app.get('/datos/proveedor/:id', (req, res) => {
+//   const query = 'SELECT * FROM Datos_Personales where fk_tipo_rol = 2';
 
-  db.query(query, (error, results) => {
-    if (error) {
-      console.error('Error al ejecutar la consulta:', error);
-      res.status(500).json({ error: 'Error interno del servidor' });
-      return;
-    }
-    res.status(200).json(results);
-  });
-});
-
-
-app.get('/datos_info/proveedor', (req, res) => {
-  const query = 'SELECT * FROM Datos_Personales where fk_tipo_rol = 2';
-
-  db.query(query, (error, results) => {
-    if (error) {
-      console.error('Error al ejecutar la consulta:', error);
-      res.status(500).json({ error: 'Error interno del servidor' });
-      return;
-    }
-    res.status(200).json(results);
-  });
-});
-
-
-app.get('/productos/fruta', (req, res) => {
-  const query = 'SELECT * FROM Productos where Id_Categoria = 1';
-
-  db.query(query, (error, results) => {
-    if (error) {
-      console.error('Error al ejecutar la consulta:', error);
-      res.status(500).json({ error: 'Error interno del servidor' });
-      return;
-    }
-    res.status(200).json(results);
-  });
-});
-
-app.get('/productos/verdura', (req, res) => {
-  const query = 'SELECT * FROM Productos where Id_Categoria = 2';
-
-  db.query(query, (error, results) => {
-    if (error) {
-      console.error('Error al ejecutar la consulta:', error);
-      res.status(500).json({ error: 'Error interno del servidor' });
-      return;
-    }
-    res.status(200).json(results);
-  });
-});
-
+//   db.query(query, (error, results) => {
+//     if (error) {
+//       console.error('Error al ejecutar la consulta:', error);
+//       res.status(500).json({ error: 'Error interno del servidor' });
+//       return;
+//     }
+//     res.status(200).json(results);
+//   });
+// });
 
 app.get('/datos/producto/:id', (req, res) => {
   const { id } = req.params;
@@ -563,36 +496,21 @@ app.get('/productos/cliente/:id', (req, res) => {
   });
 });
 
-app.post('/reservar_producto_usuario', (req, res) => {
-  const { Id_Producto, Fecha_Inicio, Duracion, Estado } = req.body;
-  console.log(Id_Producto);
+app.post('/reservar_producto', (req, res) => {
+  const { Fecha_Inicio, Duracion, Estado } = req.body;
 
   // Inserta la reserva en la tabla Reservas
-  const insertReservaQuery = 'INSERT INTO Reservas (Fecha_Inicio, Duracion, Estado) VALUES (?, ?, ?)';
-  db.query(insertReservaQuery, [Fecha_Inicio, Duracion, Estado], (err, result) => {
+  const query = 'INSERT INTO Reservas (Fecha_Inicio, Duracion, Estado) VALUES (?, ?, ?)';
+  db.query(query, [Fecha_Inicio, Duracion, Estado], (err, result) => {
     if (err) {
       console.error('Error al reservar el producto:', err);
       res.status(500).json({ error: 'Error interno del servidor' });
     } else {
-      const reservaId = result.insertId; // Obtiene el ID de reserva generado automáticamente
-
-      // Actualiza el ID de reserva en la tabla de Productos
-      const updateProductoQuery = `UPDATE Productos SET Id_Reserva = ? WHERE Id_Producto = ${Id_Producto}`;
-      db.query(updateProductoQuery, [reservaId, Id_Producto], (err, result) => {
-        if (err) {
-          console.error('Error al actualizar el ID de reserva en la tabla de Productos:', err);
-          res.status(500).json({ error: 'Error interno del servidor' });
-        } else {
-          console.log('Producto reservado con éxito');
-          res.status(200).json({ message: 'Producto reservado con éxito' });
-        }
-      });
+      console.log('Producto reservado con éxito');
+      res.status(200).json({ message: 'Producto reservado con éxito' });
     }
-  });
+  }); 
 });
-
-
-
 
 
 
@@ -626,71 +544,6 @@ app.get('/usuario_info/:correo', (req, res) => {
           res.json ('No hay registros')
       }
   })
-});
-
-app.get('/reservas', (req, res) => {
-  const query = `
-    SELECT p.*, r.*
-    FROM Productos p
-    INNER JOIN Reservas r 
-    ON p.Id_Reserva = r.Id_Reserva
-  `;
-  db.query(query, (error, results) => {
-    if (error) {
-      console.error('Error al ejecutar la consulta:', error);
-      res.status(500).json({ error: 'Error interno del servidor' });
-      return;
-    }
-    res.status(200).json(results);
-  });
-});
-
-
-
-
-// Endpoint para actualizar una reserva por ID
-app.put('/reservas/:id', (req, res) => {
-  const id = req.params.id;
-  const estado = req.body.Estado; // Suponiendo que el estado se envía en el cuerpo de la solicitud
-
-  console.log(estado);
-  console.log(id);
-
-
-  const sql = `UPDATE reservas SET Estado = ? WHERE Id_Reserva = ?`;
-  db.query(sql, [estado, id], (err, result) => {
-    if (err) {
-      console.error('Error al actualizar reserva:', err);
-      res.status(500).json({ error: 'Error interno del servidor' });
-      return;
-    }
-    console.log('Reserva actualizada correctamente');
-    res.status(200).json({ message: 'Reserva actualizada correctamente' });
-  });
-});
-
-app.get('/productos1/:id', (req, res) => {
-  const { id } = req.params;
-  const query = `
-    SELECT p.*, ps.Descripcion AS Descripcion, dp.*
-    FROM Productos p
-    INNER JOIN Pesos ps ON p.Id_Peso = ps.Id_Peso
-    INNER JOIN Datos_Personales dp ON p.Id_Dato_Personal = dp.Id_Dato_Personal
-    WHERE p.Id_Producto = ?
-  `;
-  db.query(query, [id], (err, result) => {
-      if (err) {
-          console.error('Error al mostrar', err);
-          res.status(500).json({ error: 'Error interno del servidor' });
-          return;
-      } 
-
-      if (result.length > 0) {
-          res.json(result);
-      } else {
-          res.json('No hay resultados');
-      }
-  });
 });
 
 
