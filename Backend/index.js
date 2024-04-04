@@ -23,10 +23,11 @@ const port = 5000;
 
 // Configuración de la conexión a MySQL
 const db = mysql.createConnection({
-  host: '127.0.0.1',
-  user: 'root',
-  password: '',
-  database: 'Proyecto'
+  host: 'bgyf8muwlkxkgk4t06p2-mysql.services.clever-cloud.com',
+  port: 3306,
+  user: 'uwhi2ehgq1ymqfax',
+  password: 'XW3CEsTF8fKJ3zbC6nnV',
+  database: 'bgyf8muwlkxkgk4t06p2'
 });
 
 // Conectar a MySQL
@@ -36,6 +37,8 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 // Configurar CORS después de la inicialización de app
 app.use(cors());
+
+app.get("/", (req,res)=>{res.send("Conectado Correctamente")})
 
 /**
  * @swagger
