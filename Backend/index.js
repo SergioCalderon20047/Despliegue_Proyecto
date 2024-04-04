@@ -8,9 +8,6 @@ const { error } = require('console');
 //npm install bcryptjs
 const bcrypt = require('bcryptjs');
 
-const swaggerUi = require('swagger-ui-express');
-const specs = require('./swaggerConfig');
-
 
 const app = express();
 app.use(function(req, res, next) {
@@ -33,72 +30,13 @@ const db = mysql.createConnection({
 // Conectar a MySQL
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+
 
 // Configurar CORS después de la inicialización de app
 app.use(cors());
 
 app.get("/", (req,res)=>{res.send("Conectado Correctamente")})
 
-/**
- * @swagger
- * /registrar:
- *   post:
- *     summary: Registrar un nuevo usuario
- *     description: Endpoint para registrar un nuevo usuario en la base de datos.
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               nombre1:
- *                 type: string
- *                 description: Santiago.
- *               nombre2:
- *                 type: string
- *                 description: Segundo nombre del usuario.
- *               apellido1:
- *                 type: string
- *                 description: Primer apellido del usuario.
- *               apellido2:
- *                 type: string
- *                 description: Segundo apellido del usuario.
- *               tipodoc:
- *                 type: string
- *                 description: Tipo de documento del usuario.
- *               Num_Doc:
- *                 type: string
- *                 description: Número de documento del usuario.
- *               correo:
- *                 type: string
- *                 format: email
- *                 description: Correo electrónico del usuario.
- *               usuario:
- *                 type: string
- *                 description: Nombre de usuario único.
- *               direccion:
- *                 type: string
- *                 description: Dirección del usuario.
- *               local:
- *                 type: string
- *                 description: Número local del usuario.
- *               rol:
- *                 type: string
- *                 description: Rol del usuario en el sistema.
- *               password:
- *                 type: string
- *                 format: password
- *                 description: Contraseña del usuario.
- *     responses:
- *       '200':
- *         description: Usuario registrado exitosamente.
- *       '400':
- *         description: Error de validación en los datos de entrada.
- *       '500':
- *         description: Error interno del servidor.
- */
 
 // backend: // registrar usuario 
 app.post('/registrar', async (req, res) => {
