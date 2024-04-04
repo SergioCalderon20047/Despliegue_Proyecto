@@ -119,7 +119,7 @@ app.post('/registrar', async (req, res) => {
     const queryString = 'INSERT INTO Datos_Personales (Id_Dato_Personal, nombre1, nombre2, apellido1, apellido2, fk_tipo_doc, correo, usuario, Direccion, Num_Local, fk_tipo_rol, password, estado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)';
     const values = [Num_Doc, nombre1, nombre2, apellido1, apellido2, tipodoc, correo, usuario, direccion, local, rol, hashContraseña,];
 
-    db.query(queryString, values, (error, result) => {
+    db.query(queryString, values, (error, results) => {
       if (error) {
         console.error('Error al registrar usuario en la base de datos:', error);
         res.status(500).json({ error: 'Error interno del servidor' });
