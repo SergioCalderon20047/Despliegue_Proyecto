@@ -373,7 +373,7 @@ app.put('/productos_actualizar/:id', (req, res) => {
 // Muestra los productos
 app.get('/mostrar_producto', (req, res) => {
   // Consulta SQL para seleccionar los productos y sus detalles
-  const query = `SELECT Id_Producto, pesos.Descripcion AS pesodesc, Id_Categoria, Id_Reserva, Nombre_Producto, Cantidad, productos.Descripcion, Url_Imagen, productos.Estado FROM Productos INNER JOIN pesos ON Productos.Id_Peso = pesos.Id_peso`;
+  const query = `SELECT Id_Producto, Pesos.Descripcion AS pesodesc, Id_Categoria, Id_Reserva, Nombre_Producto, Cantidad, productos.Descripcion, Url_Imagen, productos.Estado FROM Productos INNER JOIN Pesos ON Productos.Id_Peso = Pesos.Id_peso`;
   
   // Ejecutar la consulta en la base de datos
   db.query(query, (error, resultado) => {
@@ -393,7 +393,7 @@ app.get('/mostrar_producto', (req, res) => {
 app.get('/mostrar_producto/:correo_usuario', (req, res) => {
   const {correo_usuario} = req.params
   console.log(correo_usuario)
-  const query = `SELECT Id_Producto, correo,pesos.Descripcion AS pesodesc, Id_Categoria, Id_Reserva, Nombre_Producto, Cantidad, productos.Descripcion, Url_Imagen, productos.Estado FROM Productos INNER JOIN pesos ON Productos.Id_Peso = pesos.Id_peso INNER JOIN Datos_Personales on Datos_personales.Id_Dato_Personal = productos.Id_Dato_Personal WHERE correo = '${correo_usuario}'`
+  const query = `SELECT Id_Producto, correo,Pesos.Descripcion AS pesodesc, Id_Categoria, Id_Reserva, Nombre_Producto, Cantidad, productos.Descripcion, Url_Imagen, productos.Estado FROM Productos INNER JOIN Pesos ON Productos.Id_Peso = Pesos.Id_peso INNER JOIN Datos_Personales on Datos_personales.Id_Dato_Personal = productos.Id_Dato_Personal WHERE correo = '${correo_usuario}'`
 
   db.query(query, (error, resultado) => {
     if (error) return console.error(error.message)
@@ -567,7 +567,7 @@ app.get('/datos/producto/:id', (req, res) => {
         dp.*
     FROM 
         Productos p 
-        INNER JOIN pesos pes ON p.Id_Peso = pes.Id_peso
+        INNER JOIN Pesos pes ON p.Id_Peso = pes.Id_peso
         INNER JOIN Datos_Personales dp ON p.Id_Dato_Personal = dp.Id_Dato_Personal
     WHERE 
         p.Id_Producto = ${id}`;
@@ -591,7 +591,7 @@ app.get('/datos/producto/:id', (req, res) => {
 app.get('/productos/cliente/:id', (req, res) => {
   const { id } = req.params;
   // const query = `SELECT Id_Producto, pesos.Descripcion AS pesodesc, Id_Categoria, Id_Reserva, Nombre_Producto, Cantidad, productos.Descripcion, Url_Imagen, Estado FROM productos INNER JOIN pesos ON productos.Id_Peso = pesos.Id_peso where Id_Producto = ${id}`;
-  const query = `SELECT Id_Producto, correo, pesos.Descripcion AS pesodesc, Id_Categoria, Id_Reserva, Nombre_Producto, Cantidad, productos.Descripcion, Url_Imagen, productos.Estado FROM Productos INNER JOIN pesos ON productos.Id_Peso = pesos.Id_peso INNER JOIN Datos_Personales on Datos_Personales.Id_Dato_Personal = productos.Id_Dato_Personal WHERE Id_Dato_Personal = '${id}'`
+  const query = `SELECT Id_Producto, correo, Pesos.Descripcion AS pesodesc, Id_Categoria, Id_Reserva, Nombre_Producto, Cantidad, productos.Descripcion, Url_Imagen, productos.Estado FROM Productos INNER JOIN Pesos ON productos.Id_Peso = Pesos.Id_peso INNER JOIN Datos_Personales on Datos_Personales.Id_Dato_Personal = productos.Id_Dato_Personal WHERE Id_Dato_Personal = '${id}'`
   db.query(query, (err, result) => {
       if (err) {
           console.error('error al mostrar', err);
